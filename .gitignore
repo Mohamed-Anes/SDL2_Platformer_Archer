@@ -1,0 +1,7 @@
+*.vscode
+*.bat
+*.exe
+src/for_reference
+.git
+bin
+obj
