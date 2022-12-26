@@ -4,26 +4,33 @@
 
 #include <SDL2/SDL.h>
 
+#include "window.hpp"
+
 
 enum GameState{
+    LOAD,
     RUN,
     PAUSE,
-    EXIT
+    EXIT,
+    FAIL
 };
 
 class Game
 {
-private:
-    SDL_Window *window;
+public:
+    Window window;
     GameState state;
 public:
     // Constructor
     Game();
     // Destructor
     ~Game();
-
-    // game loop
+    // Initializer
+    int Init();
+    // Game loop
     int run();
+    // Input handler
+    void HandleInput();
 };
 
 

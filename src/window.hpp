@@ -1,44 +1,48 @@
 #ifndef __WINDOW_HPP__
 #define __WINDOW_HPP__
 
-#include "module.hpp"
+#include <string>
+
+#include "Defs.hpp"
 
 struct SDL_Window;
-struct SDL_Surface;
+struct SDL_Renderer;
+struct SDL_Texture;
 
-class Window : public Module
+class Window
 {
 public:
+	// Construstor
 	Window();
 
-	// Called before render is available
-	bool Awake(/*pugi::xml_node&*/);
+	//Destructor
+	~Window();
 
-	// Called before quitting
-	bool CleanUp();
+	// Initializer
+	int Init();
 
-	// Changae title
+	// Change title
 	void SetTitle(const char *title);
 
 	// Retrive window size
 	void GetWindowSize(uint &width, uint &height) const;
 
-	void ChangeFullscreen(bool fullscreen);
+	// Set or unset full screen
+	void SetFullscreen(bool fullscreen);
 
-	// Retrieve window scale
-	unsigned int GetScale() const;
+	// Update
+	void Update();
 
 public:
-	// The window we'll be renderinng to
+	// The window we'll be rendering to
 	SDL_Window *window;
-	// The surface contained by the window
-	SDL_Surface *screenSurface;
+	// The renderer
+	SDL_Renderer *renderer;
 
 private:
 	std::string title;
 	uint width;
 	uint height;
-	uint scale;
 };
 
 #endif //__WINDOW_HPP__
