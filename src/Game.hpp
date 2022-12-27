@@ -3,8 +3,10 @@
 
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include "window.hpp"
+#include "Sprite.hpp"
 
 
 enum GameState{
@@ -18,8 +20,8 @@ enum GameState{
 class Game
 {
 public:
-    Window window;
-    GameState state;
+    static Window window;
+    static GameState state;
 public:
     // Constructor
     Game();

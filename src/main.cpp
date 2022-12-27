@@ -14,6 +14,9 @@ int main(int argc, char *argv[])
 	std::ofstream out("log.txt");
 	std::cout.rdbuf(out.rdbuf());
 
+	
+	SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Hello SDL\n");
+
 	std::cout << "Starting the game" << std::endl;
 	Game Archer;
 	std::cout << "Initiating the game" << std::endl;

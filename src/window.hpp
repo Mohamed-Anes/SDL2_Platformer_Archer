@@ -1,13 +1,12 @@
 #ifndef __WINDOW_HPP__
 #define __WINDOW_HPP__
 
+#include <SDL2/SDL.h>
 #include <string>
 
 #include "Defs.hpp"
 
-struct SDL_Window;
-struct SDL_Renderer;
-struct SDL_Texture;
+
 
 class Window
 {
@@ -35,9 +34,9 @@ public:
 
 public:
 	// The window we'll be rendering to
-	SDL_Window *window;
+	static SDL_Window *window;
 	// The renderer
-	SDL_Renderer *renderer;
+	static SDL_Renderer *renderer;
 
 private:
 	std::string title;

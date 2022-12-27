@@ -1,10 +1,18 @@
 #include "Game.hpp"
 
 #include <iostream>
+#include <string>
 
+#include "Sprite.hpp"
+#include "GameEntity.hpp"
+
+
+// Static definitions
+Window Game::window;
+GameState Game::state;
 
 Game::Game() {
-    state = LOAD;
+    Game::state = LOAD;
 }
 
 Game::~Game() {
@@ -15,25 +23,47 @@ int Game::Init() {
     Uint32 flags = SDL_INIT_VIDEO;
     if (SDL_Init(flags) < 0)
 	{
-		std::cout << "SDL_Init: Couldn't start SDL\nSDL_Error: " << SDL_GetError << std::endl;
-		state = FAIL;
+		std::cout << "SDL_Init: Couldn't start SDL\nSDL_Error: " << SDL_GetError() << std::endl;
+		Game::state = FAIL;
         return -1;
 	}
-    if(window.Init() == -1){
-        state = FAIL;
+
+    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+	{
+		std::cout << "IMG_Init: Couldn't start PNG support\nSDL_Error: " << IMG_GetError() << std::endl;
+		Game::state = FAIL;
+        return -1;
+	}
+    if(Game::window.Init() == -1){
+        Game::state = FAIL;
         return -1;
     }
 
-    state = RUN;
+    Sprite::loadSprites(std::string("src/assets/assets-config.txt"));
+
+    // --Temporary part for testing-- <TEMP>
+    GameEntity testEntity;
+    testEntity.loadSprite(std::string("BGL1"));
+    testEntity.draw();
+    SDL_Rect rectangle;
+    rectangle.h = 50;
+    rectangle.w = 50;
+    rectangle.x = 50;
+    rectangle.y = 50;
+    SDL_RenderDrawRect(Window::renderer, &rectangle);
+    // <ENDTEMP>
+
+    Game::state = RUN;
     return 0;
 }
 
 int Game::run() {
-    while(state != EXIT) {
-        switch (state)
+    while(Game::state != EXIT) {
+        switch (Game::state)
         {
         case RUN:
             Game::HandleInput();
+            Game::window.Update();
             break;
 
         case PAUSE:
@@ -41,7 +71,7 @@ int Game::run() {
 
         case FAIL:
             std::cout << "Exiting with errors" << std::endl;
-            state = EXIT;
+            Game::state = EXIT;
             break;
         case EXIT:
             break;
@@ -61,7 +91,7 @@ void Game::HandleInput() {
         switch (event.type)
         {
         case SDL_QUIT:
-            state = EXIT;
+            Game::state = EXIT;
             break;
         
         default:
