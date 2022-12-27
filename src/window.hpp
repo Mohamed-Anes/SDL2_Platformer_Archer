@@ -38,7 +38,7 @@ public:
 	// The renderer
 	static SDL_Renderer *renderer;
 
-private:
+public:
 	std::string title;
 	uint width;
 	uint height;

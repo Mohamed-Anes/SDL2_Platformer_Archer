@@ -65,4 +65,5 @@ void Window::GetWindowSize(uint& width, uint& height) const
 
 void Window::Update() {
 	SDL_RenderPresent(Window::renderer);
+	std::cout << ".";
 }

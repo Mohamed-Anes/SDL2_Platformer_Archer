@@ -49,6 +49,7 @@ int Sprite::loadSprites(std::string configfname) {
         spriteId.clear();
         tempfilename.clear();
     }
+    return 0;
 
 }
 

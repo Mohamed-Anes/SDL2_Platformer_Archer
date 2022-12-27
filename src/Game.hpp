@@ -7,6 +7,7 @@
 
 #include "window.hpp"
 #include "Sprite.hpp"
+#include "GameEntity.hpp"
 
 
 enum GameState{
@@ -22,6 +23,10 @@ class Game
 public:
     static Window window;
     static GameState state;
+
+    // <TEMP>
+    GameEntity testEntity;
+    // <ENDTEMP>
 public:
     // Constructor
     Game();

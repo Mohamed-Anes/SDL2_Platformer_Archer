@@ -27,6 +27,7 @@ int Game::Init() {
 		Game::state = FAIL;
         return -1;
 	}
+    std::cout << "Initialized SDL" << std::endl;
 
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 	{
@@ -34,17 +35,21 @@ int Game::Init() {
 		Game::state = FAIL;
         return -1;
 	}
+    std::cout << "Initialized SDL Image" << std::endl;
+
     if(Game::window.Init() == -1){
         Game::state = FAIL;
         return -1;
     }
+    std::cout << "Initialized Window" << std::endl;
 
-    Sprite::loadSprites(std::string("src/assets/assets-config.txt"));
+
+    Sprite::loadSprites(std::string("src\\assets\\assets_config.txt"));
+        // Sprite::loadSprites(std::string("assets-config.txt"));
+
 
     // --Temporary part for testing-- <TEMP>
-    GameEntity testEntity;
     testEntity.loadSprite(std::string("BGL1"));
-    testEntity.draw();
     SDL_Rect rectangle;
     rectangle.h = 50;
     rectangle.w = 50;
@@ -64,6 +69,8 @@ int Game::run() {
         case RUN:
             Game::HandleInput();
             Game::window.Update();
+            testEntity.draw();
+            SDL_Delay(200);
             break;
 
         case PAUSE:
@@ -94,10 +101,22 @@ void Game::HandleInput() {
             Game::state = EXIT;
             break;
         
+        case SDL_WINDOWEVENT:
+            if(event.window.event == SDL_WINDOWEVENT_RESIZED) {
+                SDL_DestroyRenderer(window.renderer);
+                Window::renderer = SDL_CreateRenderer(Window::window, -1, SDL_RENDERER_ACCELERATED);
+                if(Window::renderer == nullptr){
+		            std::cout << "SDL_Renderer could not be recreated\nSDL_Error: " << SDL_GetError() << std::endl;
+	            }
+                std::cout << "\nwindow resized\n";
+                window.width = event.window.data1;
+                window.height = event.window.data2;
+            }
         default:
             break;
         }
     }
+
 }
 
 
