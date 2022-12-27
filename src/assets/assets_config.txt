@@ -1,0 +1,3 @@
+BGL1 src/assets/images/oak_woods_v1.0/background/background_layer_1.png 0 0 320 180
+BGL2 src/assets/images/oak_woods_v1.0/background/background_layer_2.png 0 0 320 180
+BGL3 src/assets/images/oak_woods_v1.0/background/background_layer_3.png 0 0 320 180
