@@ -14,9 +14,9 @@ GameEntity::GameEntity() {
 GameEntity::~GameEntity() {
 }
 
-int GameEntity::loadSprite(std::string spriteId) {
-    Spr = Sprite::sprites.at(spriteId);
-    if(Spr == nullptr) {
+int GameEntity::loadAnimation(std::string animId) {
+    animation = Animation::animationsMap.at(animId);
+    if(animation == nullptr) {
         std::cout << "Error accessing sprite from map" << std::endl;
         return -1;
     }
@@ -24,7 +24,13 @@ int GameEntity::loadSprite(std::string spriteId) {
 }
 
 void GameEntity::draw() {
-    SDL_RenderCopy(Window::renderer, Spr->texture, 0, 0);
+    // <TEMP>
+    SDL_Rect src, dest;
+    src.x = animation->x;
+    src.y = animation->y;
+    src.w = animation->frameWidth;
+    src.h = animation->height;
+    SDL_RenderCopy(Window::renderer, animation->spriteSheet->texture, &src, &src);
 }
 
 

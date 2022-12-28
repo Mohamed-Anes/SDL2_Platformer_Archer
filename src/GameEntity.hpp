@@ -3,13 +3,13 @@
 
 #include <string>
 
-#include "Sprite.hpp"
+#include "Animation.hpp"
 
 // Top level abstraction of an entity in the game, character or object, or background
 class GameEntity
 {
 private:
-    Sprite *Spr;
+    Animation *animation;
     int x, y;
 public:
     // Constructor
@@ -17,7 +17,7 @@ public:
     // Destructor
     ~GameEntity();
     // Sprite loader
-    int loadSprite(std::string spriteId);
+    int loadAnimation(std::string animId);
     // Draw function
     void draw();
 };

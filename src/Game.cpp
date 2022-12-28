@@ -49,7 +49,12 @@ int Game::Init() {
 
 
     // --Temporary part for testing-- <TEMP>
-    testEntity.loadSprite(std::string("BGL1"));
+    GameEntity *temp = new GameEntity();
+    temp->loadAnimation(std::string("BGL1A"));
+    entities.push_back(temp);
+    temp = new GameEntity();
+    temp->loadAnimation(std::string("PLAYER_IDLE"));
+    entities.push_back(temp);
     SDL_Rect rectangle;
     rectangle.h = 50;
     rectangle.w = 50;
@@ -68,8 +73,8 @@ int Game::run() {
         {
         case RUN:
             Game::HandleInput();
+            Game::UpdateEntities();
             Game::window.Update();
-            testEntity.draw();
             SDL_Delay(200);
             break;
 
@@ -119,6 +124,14 @@ void Game::HandleInput() {
 
 }
 
+void Game::UpdateEntities() {
+    	std::list<GameEntity *>::iterator it;
+        
+        for (it = entities.begin(); it != entities.end(); it++)
+        {
+            (*it)->draw();
+        }
+}
 
 // for looping in functions
 
