@@ -7,3 +7,5 @@ BGL3A 0 0 320 180 1
 PLAYER src/assets/images/oak_woods_v1.0/character/char_blue.png 2
 PLAYER_IDLE 0 0 336 56 6
 PLAYER_ATTACK 0 56 336 56 6
+SHOP src/assets/images/oak_woods_v1.0/decorations/shop_anim.png 1
+SHOPA 0 0 708 128 6

@@ -5,7 +5,8 @@
 
 #include "Sprite.hpp"
 #include "GameEntity.hpp"
-
+#include "Defs.hpp"
+#include "Player.hpp"
 
 // Static definitions
 Window Game::window;
@@ -49,18 +50,19 @@ int Game::Init() {
 
 
     // --Temporary part for testing-- <TEMP>
-    GameEntity *temp = new GameEntity();
+    GameEntity *temp;
+    // background
+    temp = new GameEntity(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     temp->loadAnimation(std::string("BGL1A"));
     entities.push_back(temp);
-    temp = new GameEntity();
-    temp->loadAnimation(std::string("PLAYER_IDLE"));
+    // player
+    player = new Player(100, 272, 56, 56);
+    player->loadAnimation(std::string("PLAYER_ATTACK"));
+    player->vx = 1;
+    // shop
+    temp = new GameEntity(200, 200, 118, 128);
+    temp->loadAnimation(std::string("SHOPA"));
     entities.push_back(temp);
-    SDL_Rect rectangle;
-    rectangle.h = 50;
-    rectangle.w = 50;
-    rectangle.x = 50;
-    rectangle.y = 50;
-    SDL_RenderDrawRect(Window::renderer, &rectangle);
     // <ENDTEMP>
 
     Game::state = RUN;
@@ -68,14 +70,23 @@ int Game::Init() {
 }
 
 int Game::run() {
+    uint64_t current_time = SDL_GetTicks64(), past_time, elapsed_time = 0;
+    uint64_t delay;
     while(Game::state != EXIT) {
         switch (Game::state)
         {
         case RUN:
+            past_time = current_time;
             Game::HandleInput();
-            Game::UpdateEntities();
+            Game::UpdateEntities(((float)elapsed_time) / 1000.0);
             Game::window.Update();
-            SDL_Delay(200);
+	        std::cout << ".";
+            current_time = SDL_GetTicks64();
+            elapsed_time = current_time - past_time;
+            delay = (elapsed_time < MS_PER_UPDATE)? MS_PER_UPDATE - elapsed_time : 0;
+            SDL_Delay(delay);
+            std::cout << "elapsed time: " << elapsed_time << std::endl;
+            std::cout << "delaying by: " << delay << std::endl;
             break;
 
         case PAUSE:
@@ -124,13 +135,16 @@ void Game::HandleInput() {
 
 }
 
-void Game::UpdateEntities() {
+void Game::UpdateEntities(float dt) {
     	std::list<GameEntity *>::iterator it;
         
         for (it = entities.begin(); it != entities.end(); it++)
         {
+            (*it)->update(dt);
             (*it)->draw();
         }
+        player->update(dt);
+        player->draw();
 }
 
 // for looping in functions

@@ -8,7 +8,7 @@ class GameObject : GameEntity
 private:
     
 public:
-    GameObject();
+    GameObject(int x, int y, int width, int height);
     ~GameObject();
 
 };

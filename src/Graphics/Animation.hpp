@@ -17,6 +17,8 @@ public:
     int x, y, width, height;
     int frameCount;
     int frameWidth;
+    int currentFrame;
+    
 public:
     Animation(std::string animId, Sprite *spriteSheet, int x, int y, int width, int height, int frameCount);
     ~Animation();

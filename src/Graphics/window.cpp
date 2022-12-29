@@ -3,6 +3,8 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
+#include "Defs.hpp"
+
 
 // Static definitions
 // The window we'll be rendering to
@@ -11,8 +13,8 @@ SDL_Window *Window::window = nullptr;
 SDL_Renderer *Window::renderer = nullptr;
 
 Window::Window(){
-	width = 640;
-	height = 480;
+	width = WINDOW_WIDTH;
+	height = WINDOW_HEIGHT;
 	Window::window = nullptr;
 	Window::renderer = nullptr;
 }
@@ -33,7 +35,7 @@ Window::~Window()
 int Window::Init() {
 	// Initializing SDL_Window
 	std::cout << "--Initializing SDL_Window" << std::endl;
-	Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE /* | SDL_WINDOW_BORDERLESS | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_FULLSCREEN_DESKTOP*/;
+	Uint32 flags = SDL_WINDOW_SHOWN /* | SDL_WINDOW_RESIZABLE | SDL_WINDOW_BORDERLESS | SDL_WINDOW_FULLSCREEN | SDL_WINDOW_FULLSCREEN_DESKTOP*/;
 
 	SDL_CreateWindowAndRenderer(width, height, flags, &(Window::window), &(Window::renderer));
 
@@ -57,7 +59,7 @@ void Window::SetFullscreen(bool fullscreen) {
 	}
 }
 
-void Window::GetWindowSize(uint& width, uint& height) const
+void Window::GetWindowSize(int& width, int& height) const
 {
 	width = this->width;
 	height = this->height;
@@ -65,5 +67,4 @@ void Window::GetWindowSize(uint& width, uint& height) const
 
 void Window::Update() {
 	SDL_RenderPresent(Window::renderer);
-	std::cout << ".";
 }

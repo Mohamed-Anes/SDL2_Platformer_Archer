@@ -1,7 +1,6 @@
 #include "Animation.hpp"
 
 
-
 // Static definitions
 std::map<std::string, Animation *> Animation::animationsMap;
 
@@ -13,6 +12,7 @@ Animation::Animation(std::string animId, Sprite *spriteSheet, int x, int y, int 
     this->height = height;
     this->frameCount = frameCount;
     this->frameWidth = width/frameCount;
+    this->currentFrame = 1;
     Animation::addAnimationToMap(animId, this);
 }
 

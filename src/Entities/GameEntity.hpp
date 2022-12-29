@@ -5,14 +5,22 @@
 
 #include "Animation.hpp"
 
+// replaced by an enum of player state and a vector of possible animations accessed by the enum
+// typedef std::pair<std::string, Animation *> namedAnimation;
+
 // Top level abstraction of an entity in the game, character or object, or background
 class GameEntity
 {
-private:
+protected:
+    
     Animation *animation;
-    int x, y;
+    float x, y;
+    int width, height;
 public:
     // Constructor
+    // TODO: Transfer these arguments somewhere else
+    GameEntity(int x, int y, int width, int height);
+    // Default Constructor
     GameEntity();
     // Destructor
     ~GameEntity();
@@ -20,6 +28,8 @@ public:
     int loadAnimation(std::string animId);
     // Draw function
     void draw();
+    // Update <TEMP>
+    void update(float dt);
 };
 
 

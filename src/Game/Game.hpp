@@ -9,6 +9,7 @@
 #include "window.hpp"
 #include "Sprite.hpp"
 #include "GameEntity.hpp"
+#include "Player.hpp"
 
 
 enum GameState{
@@ -27,6 +28,7 @@ public:
 
     // <TEMP>
     std::list<GameEntity *> entities;
+    Player *player;
     // <ENDTEMP>
 public:
     // Constructor
@@ -40,7 +42,7 @@ public:
     // Input handler
     void HandleInput();
     // Update entities
-    void UpdateEntities();
+    void UpdateEntities(float dt);
 };
 
 
