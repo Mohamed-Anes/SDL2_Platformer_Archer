@@ -3,10 +3,11 @@
 #include <iostream>
 #include <string>
 
-#include "Sprite.hpp"
-#include "GameEntity.hpp"
+#include "SpriteSheet.hpp"
+#include "GameObject.hpp"
 #include "Defs.hpp"
 #include "Player.hpp"
+
 
 // Static definitions
 Window Game::window;
@@ -45,23 +46,24 @@ int Game::Init() {
     std::cout << "Initialized Window" << std::endl;
 
 
-    Sprite::loadSprites(std::string("src\\assets\\assets_config.txt"));
+    SpriteSheet::loadSpriteSheets(std::string("src\\assets\\assets_config.txt"));
         // Sprite::loadSprites(std::string("assets-config.txt"));
 
 
     // --Temporary part for testing-- <TEMP>
-    GameEntity *temp;
+    GameObject *temp;
     // background
-    temp = new GameEntity(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-    temp->loadAnimation(std::string("BGL1A"));
+    temp = new GameObject(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 1);
+    temp->loadAnimation(std::string("BGL1A"), IDLE);
     entities.push_back(temp);
     // player
-    player = new Player(100, 272, 56, 56);
-    player->loadAnimation(std::string("PLAYER_ATTACK"));
+    player = new Player(100, 272, 56, 56, 1);
+    player->loadAnimation(std::string("PLAYER_ATTACK"), IDLE);
     player->vx = 1;
+    entities.push_back(player);
     // shop
-    temp = new GameEntity(200, 200, 118, 128);
-    temp->loadAnimation(std::string("SHOPA"));
+    temp = new GameObject(200, 200, 118, 128, 1);
+    temp->loadAnimation(std::string("SHOPA"), IDLE);
     entities.push_back(temp);
     // <ENDTEMP>
 
@@ -136,15 +138,15 @@ void Game::HandleInput() {
 }
 
 void Game::UpdateEntities(float dt) {
-    	std::list<GameEntity *>::iterator it;
+    	std::list<GameObject *>::iterator it;
         
         for (it = entities.begin(); it != entities.end(); it++)
         {
             (*it)->update(dt);
-            (*it)->draw();
+            (*it)->render();
         }
-        player->update(dt);
-        player->draw();
+        // player->update(dt);
+        // player->render();
 }
 
 // for looping in functions

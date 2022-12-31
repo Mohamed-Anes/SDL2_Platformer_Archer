@@ -1,14 +1,14 @@
 #ifndef __PLAYER_HPP__
 #define __PLAYER_HPP__
 
-#include "GameEntity.hpp"
+#include "GameObject.hpp"
 
-class Player : public GameEntity
+class Player : public GameObject
 {
 public:
     float vx, vy;
 public:
-    Player(int x, int y, int width, int height);
+    Player(int x, int y, int width, int height, int nbStates);
     ~Player();
     void update(float dt);
 

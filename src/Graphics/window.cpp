@@ -12,11 +12,8 @@ SDL_Window *Window::window = nullptr;
 // The renderer
 SDL_Renderer *Window::renderer = nullptr;
 
-Window::Window(){
-	width = WINDOW_WIDTH;
-	height = WINDOW_HEIGHT;
-	Window::window = nullptr;
-	Window::renderer = nullptr;
+Window::Window(): width(WINDOW_WIDTH), height(WINDOW_HEIGHT) {
+
 }
 
 Window::~Window()
@@ -43,6 +40,7 @@ int Window::Init() {
 		std::cout << "SDL_Window and SDL_Renderer could not be created\nSDL_Error: " << SDL_GetError() << std::endl;
 		return -1;
 	}
+
 	return 0;
 }
 

@@ -1,29 +1,29 @@
 #ifndef __SPRITE_HPP__
 #define __SPRITE_HPP__
 
-#include <SDL2/SDL.h>
-#include <string>
+#include "SpriteSheet.hpp"
+
 #include <map>
+#include <string>
 
-
-// Wrapper class for the Textures map
-class Sprite {
+// Normal class and wrapper for Sprites map
+// Only works with horizontal animations of constant width
+class Sprite
+{
 public:
-    SDL_Texture *texture;
+    static std::map<const std::string, Sprite *> spriteAtlas;
+    // TODO: change the x, u, w, h into vectors, change the int into uint
+    SDL_Texture *spriteSheet;
+    SDL_Rect positionAndSize;
+    int frameCount;
+    int frameWidth;
+    
 public:
-    static std::map<std::string, Sprite *> spritesMap;
-public:
-    // Constructor, takes a png filename and a sprite ID, loads the texture and adds it to the map
-    Sprite(std::string spriteId, std::string filename);
-    // Destructor
+    Sprite(const std::string& animId, SDL_Texture *spriteSheet, int x, int y, int width, int height, int frameCount);
     ~Sprite();
-
-    // Add a sprite to the map
-    static inline int addSpriteToMap(std::string spriteId, Sprite* newSprite);
-    // Load all sprites specified in the configuration file
-    static int loadSprites(std::string configfname);
-
+    static inline int addSpriteToMap(const std::string& animId, Sprite* newSprite);
 };
+
 
 
 

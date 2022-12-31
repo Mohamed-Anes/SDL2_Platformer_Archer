@@ -5,7 +5,7 @@
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 360
 
-#define MS_PER_UPDATE 200 // for the main loop - make 25 ~ 30 if game is slow
+#define MS_PER_UPDATE 20 // for the main loop - make 25 ~ 30 if game is slow
 
 
 /*

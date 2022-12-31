@@ -8,7 +8,7 @@
 
 #include "window.hpp"
 #include "Sprite.hpp"
-#include "GameEntity.hpp"
+#include "GameObject.hpp"
 #include "Player.hpp"
 
 
@@ -27,7 +27,7 @@ public:
     static GameState state;
 
     // <TEMP>
-    std::list<GameEntity *> entities;
+    std::list<GameObject *> entities;
     Player *player;
     // <ENDTEMP>
 public:
@@ -43,6 +43,7 @@ public:
     void HandleInput();
     // Update entities
     void UpdateEntities(float dt);
+
 };
 
 
