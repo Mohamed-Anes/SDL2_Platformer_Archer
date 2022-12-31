@@ -55,16 +55,16 @@ int Game::Init() {
     // background
     temp = new GameObject(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 1);
     temp->loadAnimation(std::string("BGL1A"), IDLE);
-    entities.push_back(temp);
+    gamePlayScene.addObject(temp);
     // player
-    player = new Player(100, 272, 56, 56, 1);
-    player->loadAnimation(std::string("PLAYER_ATTACK"), IDLE);
-    player->vx = 1;
-    entities.push_back(player);
+    temp = new Player(100, 272, 56, 56, 1);
+    temp->loadAnimation(std::string("PLAYER_ATTACK"), IDLE);
+    ((Player *)temp)->vx = 1;
+    gamePlayScene.addObject(temp);
     // shop
     temp = new GameObject(200, 200, 118, 128, 1);
     temp->loadAnimation(std::string("SHOPA"), IDLE);
-    entities.push_back(temp);
+    gamePlayScene.addObject(temp);
     // <ENDTEMP>
 
     Game::state = RUN;
@@ -80,7 +80,10 @@ int Game::run() {
         case RUN:
             past_time = current_time;
             Game::HandleInput();
-            Game::UpdateEntities(((float)elapsed_time) / 1000.0);
+            // Game::UpdateEntities(((float)elapsed_time) / 1000.0);
+            gamePlayScene.update(((float)elapsed_time) / 1000.0);
+            gamePlayScene.render();
+            
             Game::window.Update();
 	        std::cout << ".";
             current_time = SDL_GetTicks64();
@@ -137,17 +140,17 @@ void Game::HandleInput() {
 
 }
 
-void Game::UpdateEntities(float dt) {
-    	std::list<GameObject *>::iterator it;
+// void Game::UpdateEntities(float dt) {
+//     	std::list<GameObject *>::iterator it;
         
-        for (it = entities.begin(); it != entities.end(); it++)
-        {
-            (*it)->update(dt);
-            (*it)->render();
-        }
-        // player->update(dt);
-        // player->render();
-}
+//         for (it = entities.begin(); it != entities.end(); it++)
+//         {
+//             (*it)->update(dt);
+//             (*it)->render();
+//         }
+//         // player->update(dt);
+//         // player->render();
+// }
 
 // for looping in functions
 

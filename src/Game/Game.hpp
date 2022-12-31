@@ -4,12 +4,9 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <list>
 
 #include "window.hpp"
-#include "Sprite.hpp"
-#include "GameObject.hpp"
-#include "Player.hpp"
+#include "Scene.hpp"
 
 
 enum GameState{
@@ -25,11 +22,8 @@ class Game
 public:
     static Window window;
     static GameState state;
+    Scene gamePlayScene;
 
-    // <TEMP>
-    std::list<GameObject *> entities;
-    Player *player;
-    // <ENDTEMP>
 public:
     // Constructor
     Game();
