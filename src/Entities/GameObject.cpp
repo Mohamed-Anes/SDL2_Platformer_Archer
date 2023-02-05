@@ -56,3 +56,18 @@ void GameObject::render() {
 void GameObject::update(float dt) {
 }
 
+// AABB collision detection, for use with player character and eventually NPCs
+bool GameObject::isColliding(GameObject *other){
+    if(
+        this->positionAndSize.x < other->positionAndSize.x + other->positionAndSize.w &&
+        this->positionAndSize.x + this->positionAndSize.w > other->positionAndSize.x &&
+        this->positionAndSize.y < other->positionAndSize.y + other->positionAndSize.h &&
+        this->positionAndSize.y + this->positionAndSize.h > other->positionAndSize.y
+    ) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+

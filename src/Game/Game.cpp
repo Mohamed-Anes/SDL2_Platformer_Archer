@@ -53,14 +53,14 @@ int Game::Init() {
     // --Temporary part for testing-- <TEMP>
     GameObject *temp;
     // background
-    temp = new GameObject(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 1);
-    temp->loadAnimation(std::string("BGL1A"), IDLE);
-    gamePlayScene.addObject(temp);
+    // temp = new GameObject(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 1);
+    // temp->loadAnimation(std::string("BGL1A"), IDLE);
+    // gamePlayScene.addObject(temp);
     // player
     temp = new Player(100, 272, 56, 56, 1);
     temp->loadAnimation(std::string("PLAYER_ATTACK"), IDLE);
     ((Player *)temp)->vx = 1;
-    gamePlayScene.addObject(temp);
+    gamePlayScene.player = (Player *)temp;
     // shop
     temp = new GameObject(200, 200, 118, 128, 1);
     temp->loadAnimation(std::string("SHOPA"), IDLE);
@@ -90,8 +90,8 @@ int Game::run() {
             elapsed_time = current_time - past_time;
             delay = (elapsed_time < MS_PER_UPDATE)? MS_PER_UPDATE - elapsed_time : 0;
             SDL_Delay(delay);
-            std::cout << "elapsed time: " << elapsed_time << std::endl;
-            std::cout << "delaying by: " << delay << std::endl;
+            // std::cout << "elapsed time: " << elapsed_time << std::endl;
+            // std::cout << "delaying by: " << delay << std::endl;
             break;
 
         case PAUSE:
@@ -112,12 +112,43 @@ int Game::run() {
     return 0;
 }
 
+// TO-DO: add a keyboard state buffer, to be able to detect multiple keys pressed at the same time
 void Game::HandleInput() {
     SDL_Event event;
 
     while(SDL_PollEvent(&event)) {
         switch (event.type)
         {
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_SPACE:
+                gamePlayScene.player->vy = JUMP_SPEED;
+                break;
+            case SDLK_RIGHT:
+                gamePlayScene.player->vx = PLAYER_SPEED;
+                break;
+            case SDLK_LEFT:
+                gamePlayScene.player->vx = -PLAYER_SPEED;
+                break;
+            default:
+                break;
+            }
+            break;
+        
+        case SDL_KEYUP:
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_RIGHT:
+                gamePlayScene.player->vx = 0;
+            case SDLK_LEFT:
+                gamePlayScene.player->vx = 0;
+                break;
+            default:
+                break;
+            }
+            break;
+
         case SDL_QUIT:
             Game::state = EXIT;
             break;
@@ -133,6 +164,7 @@ void Game::HandleInput() {
                 window.width = event.window.data1;
                 window.height = event.window.data2;
             }
+            break;
         default:
             break;
         }

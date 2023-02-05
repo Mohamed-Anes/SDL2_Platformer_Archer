@@ -42,6 +42,8 @@ public:
     void render();
     // Update <TEMP>
     void update(float dt);
+
+    bool isColliding(GameObject *other);
 };
 
 

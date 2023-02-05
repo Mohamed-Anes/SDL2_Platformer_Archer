@@ -1,6 +1,7 @@
 
 #include "Scene.hpp"
 
+#include <iostream>
 
 
 Scene::Scene() {
@@ -14,6 +15,9 @@ void Scene::update(float dt) {
     for(auto it = objects.begin(); it != objects.end(); it++) {
         (*it)->update(dt);
     }
+    player->update(dt);
+
+    resolveCollisions();
 }
 
 void Scene::render() {
@@ -21,6 +25,7 @@ void Scene::render() {
     for(auto it = objects.begin(); it != objects.end(); it++) {
         (*it)->render();
     }
+    player->render();
 }
 
 void Scene::addObject(GameObject *object) {
@@ -34,3 +39,16 @@ void Scene::removeObject(GameObject *object) {
     objects.remove(object);
 }
 
+
+
+void Scene::resolveCollisions(){
+
+    for(auto it = objects.begin(); it != objects.end(); it++) {
+        if((*it)->isColliding(player)){
+            // resolve
+            player->vy = 10;
+            std::cout << "\n-- Collision --\n";
+        }
+    }
+
+}

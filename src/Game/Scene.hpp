@@ -4,6 +4,7 @@
 #include <list>
 
 #include "GameObject.hpp"
+#include "Player.hpp"
 
 // TODO: make a constructor that would take a list of all initial objects
 // TODO: make update and render methods only execute on elements within Camera
@@ -12,6 +13,8 @@ class Scene
 private:
     std::list<GameObject *> objects;
     SDL_Rect Camera;
+public:
+    Player *player;
 public:
     // Constructor
     Scene();
@@ -25,6 +28,8 @@ public:
     void addObject(GameObject *object);
     // remove object
     void removeObject(GameObject *object);
+    //
+    void resolveCollisions();
 };
 
 

@@ -65,4 +65,5 @@ void Window::GetWindowSize(int& width, int& height) const
 
 void Window::Update() {
 	SDL_RenderPresent(Window::renderer);
+	SDL_RenderClear(Window::renderer);
 }
