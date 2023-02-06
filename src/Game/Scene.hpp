@@ -12,9 +12,10 @@ class Scene
 {
 private:
     std::list<GameObject *> objects;
-    SDL_Rect Camera;
+    SDL_Rect camera;
 public:
     Player *player;
+    GameObject *background;
 public:
     // Constructor
     Scene();

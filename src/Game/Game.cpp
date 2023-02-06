@@ -53,9 +53,9 @@ int Game::Init() {
     // --Temporary part for testing-- <TEMP>
     GameObject *temp;
     // background
-    // temp = new GameObject(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 1);
-    // temp->loadAnimation(std::string("BGL1A"), IDLE);
-    // gamePlayScene.addObject(temp);
+    temp = new GameObject(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 1);
+    temp->loadAnimation(std::string("BGL1A"), IDLE);
+    gamePlayScene.background = temp;
     // player
     temp = new Player(100, 272, 56, 56, 1);
     temp->loadAnimation(std::string("PLAYER_ATTACK"), IDLE);
@@ -64,6 +64,10 @@ int Game::Init() {
     // shop
     temp = new GameObject(200, 200, 118, 128, 1);
     temp->loadAnimation(std::string("SHOPA"), IDLE);
+    gamePlayScene.addObject(temp);
+    // platforme
+    temp = new GameObject(0, 328, 96, 24, 1);
+    temp->loadAnimation(std::string("PLATFORME"), IDLE);
     gamePlayScene.addObject(temp);
     // <ENDTEMP>
 

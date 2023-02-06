@@ -9,3 +9,5 @@ PLAYER_IDLE 0 0 336 56 6
 PLAYER_ATTACK 0 56 336 56 6
 SHOP src/assets/images/oak_woods_v1.0/decorations/shop_anim.png 1
 SHOPA 0 0 708 128 6
+TILESET src/assets/images/oak_woods_v1.0/oak_woods_tileset.png 1
+PLATFORME 0 0 96 24 1

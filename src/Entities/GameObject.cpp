@@ -50,6 +50,8 @@ void GameObject::render() {
     dest = {(int)positionAndSize.x, (int)positionAndSize.y, (int)positionAndSize.w, (int)positionAndSize.h};
 
     SDL_RenderCopy(Window::renderer, animations[state].sprite->spriteSheet, &src, &dest);
+    SDL_SetRenderDrawColor(Window::renderer, 255, 0, 0, 255);
+    SDL_RenderDrawRectF(Window::renderer, &(this->positionAndSize));
 }
 
 
