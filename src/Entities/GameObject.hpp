@@ -47,7 +47,7 @@ public:
     // Sprite loader
     int loadAnimation(const std::string& animId, ObjectState state);
     // Draw function
-    void render();
+    void render(int camera_offset);
     // Update <TEMP>
     void update(float dt);
 

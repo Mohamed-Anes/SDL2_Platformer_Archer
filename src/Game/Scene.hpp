@@ -7,7 +7,7 @@
 #include "Player.hpp"
 
 // TODO: make a constructor that would take a list of all initial objects
-// TODO: make update and render methods only execute on elements within Camera
+// TODO: make update and render methods only execute on elements within camera
 class Scene
 {
 private:

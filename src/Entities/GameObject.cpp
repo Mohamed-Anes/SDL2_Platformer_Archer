@@ -40,19 +40,18 @@ int GameObject::loadAnimation(const std::string& animId, ObjectState state) {
     return 0;
 }
 
-void GameObject::render() {
+void GameObject::render(int camera_offset) {
     // <TEMP>
     SDL_Rect src = animations[state].sprite->positionAndSize;
     src.w = animations[state].sprite->frameWidth;
     src.x += src.w * animations[state].currentFrame;
 
     
-    dest = {(int)positionAndSize.x, (int)positionAndSize.y, (int)positionAndSize.w, (int)positionAndSize.h};
+    dest = {(int)positionAndSize.x - camera_offset, (int)positionAndSize.y, (int)positionAndSize.w, (int)positionAndSize.h};
 
-    // SDL_RenderCopy(Window::renderer, animations[state].sprite->spriteSheet, &src, &dest);
     SDL_RenderCopyEx(Window::renderer, animations[state].sprite->spriteSheet, &src, &dest, NULL, NULL, facing);
     SDL_SetRenderDrawColor(Window::renderer, 255, 0, 0, 255);
-    SDL_RenderDrawRectF(Window::renderer, &(this->positionAndSize));
+    SDL_RenderDrawRect(Window::renderer, &(dest));
 }
 
 

@@ -5,6 +5,7 @@
 
 
 Scene::Scene() {
+    camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 }
 
 Scene::~Scene() {
@@ -21,17 +22,17 @@ void Scene::update(float dt) {
     resolveCollisions();
 
     player->update(dt);
-
+    camera.x = player->positionAndSize.x - 100;
 }
 
 void Scene::render() {
 
-    background->render();
+    background->render(0);
     // TODO: consider storing objects.end() into a variable
     for(auto it = objects.begin(); it != objects.end(); it++) {
-        (*it)->render();
+        (*it)->render(camera.x);
     }
-    player->render();
+    player->render(camera.x);
 }
 
 void Scene::addObject(GameObject *object) {
