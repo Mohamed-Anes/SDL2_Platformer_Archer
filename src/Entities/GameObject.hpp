@@ -10,11 +10,18 @@
 struct Animation {
     Sprite *sprite;
     int currentFrame;
+    const int time_per_frame = 120;
+    int elapsed;
 };
 
 enum ObjectState {
     IDLE = 0, ACTIVE, PAUSED
 };
+
+// objects face to the right by default
+#define RIGHT SDL_FLIP_NONE
+#define LEFT SDL_FLIP_HORIZONTAL
+
 
 // replaced by an enum of player state and a vector of possible animations accessed by the enum
 // typedef std::pair<std::string, Animation *> namedAnimation;
@@ -28,6 +35,7 @@ public:
     std::vector<Animation> animations;
     SDL_FRect positionAndSize; // add SDL_Rect if needed to send position
     SDL_Rect dest; // for rendering
+    SDL_RendererFlip facing;
 public:
     // Constructor
     // TODO: Transfer these arguments somewhere else

@@ -93,7 +93,7 @@ void Scene::resolveCollisions(){
 
             }
 
-            std::cout << "\n-- Collision --\n";
+            // std::cout << "\n-- Collision --\n";
         }
     }
 

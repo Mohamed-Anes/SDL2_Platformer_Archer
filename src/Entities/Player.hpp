@@ -11,7 +11,7 @@ public:
     Player(int x, int y, int width, int height, int nbStates);
     ~Player();
     void update(float dt);
-
+    
 };
 
 

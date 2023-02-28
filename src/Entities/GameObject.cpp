@@ -16,7 +16,9 @@ GameObject::GameObject(int x, int y, int width, int height, int nbStates):
     for(int i = 0; i < nbStates; i++) {
         animations[i].sprite = nullptr;
         animations[i].currentFrame = 0;
+        animations[i].elapsed = 0;
     }
+    facing = RIGHT;
 }
 
 GameObject::GameObject() {
@@ -44,18 +46,23 @@ void GameObject::render() {
     src.w = animations[state].sprite->frameWidth;
     src.x += src.w * animations[state].currentFrame;
 
-    // animations[state].currentFrame += 1;
-    animations[state].currentFrame = ++animations[state].currentFrame % animations[state].sprite->frameCount;
-
+    
     dest = {(int)positionAndSize.x, (int)positionAndSize.y, (int)positionAndSize.w, (int)positionAndSize.h};
 
-    SDL_RenderCopy(Window::renderer, animations[state].sprite->spriteSheet, &src, &dest);
+    // SDL_RenderCopy(Window::renderer, animations[state].sprite->spriteSheet, &src, &dest);
+    SDL_RenderCopyEx(Window::renderer, animations[state].sprite->spriteSheet, &src, &dest, NULL, NULL, facing);
     SDL_SetRenderDrawColor(Window::renderer, 255, 0, 0, 255);
     SDL_RenderDrawRectF(Window::renderer, &(this->positionAndSize));
 }
 
 
 void GameObject::update(float dt) {
+    // transitioning to the next frame
+    animations[state].elapsed += (int)(dt*1000);
+    if(animations[state].elapsed > animations[state].time_per_frame) {
+        animations[state].currentFrame = ++animations[state].currentFrame % animations[state].sprite->frameCount;
+        animations[state].elapsed -= animations[state].time_per_frame;
+    }
 }
 
 // AABB collision detection, for use with player character and eventually NPCs

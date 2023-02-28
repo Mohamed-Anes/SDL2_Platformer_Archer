@@ -57,8 +57,9 @@ int Game::Init() {
     temp->loadAnimation(std::string("BGL1A"), IDLE);
     gamePlayScene.background = temp;
     // player
-    temp = new Player(100, 272, 56, 56, 1);
-    temp->loadAnimation(std::string("PLAYER_ATTACK"), IDLE);
+    temp = new Player(100, 272, 56, 56, 2);
+    temp->loadAnimation(std::string("PLAYER_IDLE"), IDLE);
+    temp->loadAnimation(std::string("PLAYER_RUN"), ACTIVE);
     ((Player *)temp)->vx = 1;
     gamePlayScene.player = (Player *)temp;
     // shop
@@ -94,8 +95,8 @@ int Game::run() {
             elapsed_time = current_time - past_time;
             delay = (elapsed_time < MS_PER_UPDATE)? MS_PER_UPDATE - elapsed_time : 0;
             SDL_Delay(delay);
-            // std::cout << "elapsed time: " << elapsed_time << std::endl;
-            // std::cout << "delaying by: " << delay << std::endl;
+            std::cout << "elapsed time: " << elapsed_time << std::endl;
+            std::cout << "delaying by: " << delay << std::endl;
             break;
 
         case PAUSE:
