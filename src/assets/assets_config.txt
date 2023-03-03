@@ -1,3 +1,14 @@
-BGL1 src/assets/images/oak_woods_v1.0/background/background_layer_1.png 0 0 320 180
-BGL2 src/assets/images/oak_woods_v1.0/background/background_layer_2.png 0 0 320 180
-BGL3 src/assets/images/oak_woods_v1.0/background/background_layer_3.png 0 0 320 180
+BGL1 src/assets/images/oak_woods_v1.0/background/background_layer_1.png 1
+BGL1A 0 0 320 180 1
+BGL2 src/assets/images/oak_woods_v1.0/background/background_layer_2.png 1
+BGL2A 0 0 320 180 1
+BGL3 src/assets/images/oak_woods_v1.0/background/background_layer_3.png 1
+BGL3A 0 0 320 180 1
+PLAYER src/assets/images/oak_woods_v1.0/character/char_blue.png 3
+PLAYER_IDLE 0 0 336 56 6
+PLAYER_ATTACK 0 56 336 56 6
+PLAYER_RUN 0 112 448 56 8
+SHOP src/assets/images/oak_woods_v1.0/decorations/shop_anim.png 1
+SHOPA 0 0 708 128 6
+TILESET src/assets/images/oak_woods_v1.0/oak_woods_tileset.png 1
+PLATFORME 0 0 96 24 1

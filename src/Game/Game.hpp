@@ -6,8 +6,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "window.hpp"
-#include "Sprite.hpp"
-#include "GameEntity.hpp"
+#include "Scene.hpp"
 
 
 enum GameState{
@@ -23,10 +22,8 @@ class Game
 public:
     static Window window;
     static GameState state;
+    Scene gamePlayScene;
 
-    // <TEMP>
-    GameEntity testEntity;
-    // <ENDTEMP>
 public:
     // Constructor
     Game();
@@ -38,6 +35,9 @@ public:
     int run();
     // Input handler
     void HandleInput();
+    // Update entities
+    void UpdateEntities(float dt);
+
 };
 
 

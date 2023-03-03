@@ -4,7 +4,6 @@
 #include <SDL2/SDL.h>
 #include <string>
 
-#include "Defs.hpp"
 
 
 
@@ -24,7 +23,7 @@ public:
 	void SetTitle(const char *title);
 
 	// Retrive window size
-	void GetWindowSize(uint &width, uint &height) const;
+	void GetWindowSize(int &width, int &height) const;
 
 	// Set or unset full screen
 	void SetFullscreen(bool fullscreen);
@@ -40,8 +39,8 @@ public:
 
 public:
 	std::string title;
-	uint width;
-	uint height;
+	int width;
+	int height;
 };
 
 #endif //__WINDOW_HPP__
